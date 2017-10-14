@@ -7,4 +7,6 @@
 !/upload/system/storage/cache/index.html
 
 # IDE Project files
-/.idea
+.idea
+image/cache/
+journal-cache/
