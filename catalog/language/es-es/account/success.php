@@ -1,9 +1,9 @@
 <?php
 // Heading
-$_['heading_title'] = 'Tu cuenta ha sido creada con &eacute;xito!';
+$_['heading_title'] = 'Tu cuenta ha sido creada con exito!';
 
 // Text
-$_['text_message']  = '<p> Enhorabuena! Su nueva cuenta ha sido creada con &eacute;xito! </p> <p> Ahora es un miembro afiliado % s. </p> <p> Si usted tiene alguna pregunta acerca del funcionamiento de este sistema de afiliados, por favor env&iacute;e un correo electr&oacute;nico al due&ntilde;o de la tienda. </p> <p> Una confirmaci&oacute;n ha sido enviada a la direcci&oacute;n de correo electr&oacute;nico proporcionado. Si usted no lo ha recibido menos de una hora, <a href="%s"> cont&aacute;ctanos </a>. </p>';
-$_['text_approval'] = '<p>Gracias por registrarse en % s! </p> <p> Se le notificar&aacute; por correo electr&oacute;nico una vez que su cuenta ha sido activada por el due&ntilde;o de la tienda. </p> <p> Si usted tiene alguna pregunta acerca del funcionamiento de esta tienda en l&iacute;nea, por favor <a href="%s"> en contacto con el propietario de la tienda </a>.</p>';
+$_['text_message']  = '<p>¡Felicitaciones! ¡Tu nueva cuenta se ha creado con éxito!</p> <p>Ahora puede aprovechar los privilegios de los miembros para mejorar su experiencia de compra en línea con nosotros.</p> <p>Si tiene CUALQUIER pregunta sobre el funcionamiento de esta tienda en línea, envíe un correo electrónico al propietario de la tienda.</p> <p>Se ha enviado una confirmación a la dirección de correo electrónico proporcionada. Si no lo recibió dentro de una hora, por favor <a href="%s">Contacto</a>.</p>';
+$_['text_approval'] = '<p>Gracias por registrarse con % s!</p> <p>Se le notificará por correo electrónico una vez que el propietario de la tienda haya activado su cuenta.</p> <p>Si tiene CUALQUIER pregunta sobre el funcionamiento de esta tienda en línea, por favor <a href="%s"> en contacto con el propietario de la tienda </a>.</p>';
 $_['text_account']  = 'Cuenta';
 $_['text_success']  = 'Genial';
