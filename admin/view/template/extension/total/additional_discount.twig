@@ -1,0 +1,150 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-total_additional_discount" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+	  {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		{% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+  {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+   {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-total_additional_discount" class="form-horizontal">
+		 {% for language in languages %}
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-bank{{ language.language_id }}">{{ entry_title }}</label>
+            <div class="col-sm-10">
+              <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                <input name="total_additional_discount_title{{ language.language_id }}" placeholder="{{ entry_title }}" id="input-bank{{ language.language_id }}" class="form-control" value="{% if total_additional_discount_title[language.language_id] %}{{ total_additional_discount_title[language.language_id] }}{% endif %}"/>
+              </div>
+              {% if 'error_title' . language.language_id %}
+              <div class="text-danger">{{'error_title' . language.language_id }}</div>
+             {% endif %}
+            </div>
+          </div>
+		  {% endfor %}
+		  <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="total_additional_discount_status" id="input-status" class="form-control">
+               {% if total_additional_discount_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="total_additional_discount_sort_order" value="{{ total_additional_discount_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+            </div>
+          </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-discount">{{ entry_discount }}</label>
+			<div class="col-sm-10">
+			  <div class="table-responsive">
+				<table id="discounts" class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<td>{{ entry_customer_group }}</td>
+							<td>{{ entry_total }}</td>
+							<td>{{ entry_discount_type }}</td>
+							<td>{{ entry_discount }}</td>
+							<td>{{ entry_action }}</td>
+						</tr>
+					</thead>
+					<tbody>
+					{% set discount_row = 0 %}
+						{% for array in total_additional_discount_array %}
+						<tr id="discount-row{{ discount_row }}">
+							<td>
+								<select  name="total_additional_discount_array[{{ discount_row }}][customer_group_id]">
+									<option value="0">{{ text_all_group }}</option>
+										{% for customer_group in customer_groups %}
+											{% if customer_group.customer_group_id == array.customer_group_id %}
+											{% set select ='selected=selected' %}
+											{% else %}
+											{% set select = '' %}
+										{% endif %}
+									
+										<option {{ select }} value="{{ customer_group.customer_group_id }}">{{ customer_group.name }}</option>
+										{% endfor %}
+								</select>
+							</td>
+							<td><input type="text" name="total_additional_discount_array[{{ discount_row }}][to_total]" value="{{ array.to_total }}"/> between <input type="text" name="total_additional_discount_array[{{ discount_row }}][from_total]" value="{{ array.from_total }}"/></td>
+							<td>
+								<select name="total_additional_discount_array[{{ discount_row }}][type]">
+									<option {% if array.type =='P' %} selected="selected" {% endif %} value="P">{{ text_percentage }}</option>
+									<option  {% if array.type =='F' %} selected="selected" {% endif %} value="F">{{ text_fixed }}</option>
+								</select>
+							</td>
+							<td>
+								<input type="text" name="total_additional_discount_array[{{ discount_row }}][discount]" value="{{ array.discount }}"/>
+							</td>
+							<td><button type="button" onclick="$('#discount-row{{ discount_row }}, .tooltip').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+						</tr>
+						{% set discount_row = discount_row + 1 %}{% endfor %}
+					</tbody>
+					 <tfoot>
+					  <tr>
+						<td colspan="4"></td>
+						<td class="text-left"><button type="button" onclick="addDiscount();" data-toggle="tooltip" title="{{ button_discount_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+					  </tr>
+					  </tfoot>
+				</table>
+			  </div>
+			</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+var discount_row = {{ discount_row }};
+function addDiscount(){
+	html = '<tr id="discount-row'+ discount_row +'">';
+	html += '<td>';
+	html += '<select  name="total_additional_discount_array['+ discount_row +'][customer_group_id]">';
+	html += '<option value="0">{{ text_all_group }}</option>';
+	{% for customer_group in customer_groups %}
+	html += '<option value="{{ customer_group.customer_group_id }}">{{ customer_group.name }}</option>';
+	{% endfor %}
+	html += '</select>';
+	html += '</td>';
+	html += '<td><input type="text" name="total_additional_discount_array['+ discount_row +'][to_total]" value=""/> between <input type="text" name="total_additional_discount_array['+ discount_row +'][from_total]" value=""/></td>';
+	html += '<td>';
+	html += '<select name="total_additional_discount_array['+ discount_row +'][type]">';
+	html += '<option value="P">{{ text_percentage }}</option>';
+	html += '<option value="F">{{ text_fixed }}</option>';
+	html += '</select>';
+	html += '</td>';
+	html += '<td>';
+	html += '<input type="text" name="total_additional_discount_array['+ discount_row +'][discount]" value=""/>';
+	html += '</td>';
+	html += '  <td class="text-left"><button type="button" onclick="$(\'#discount-row' + discount_row  + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+	html += '</tr>';
+	$('#discounts tbody').append(html);
+	discount_row++;
+}
+//--></script>
+{{ footer }}
