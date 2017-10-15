@@ -11,7 +11,7 @@ $_['text_telephone'] = 'Tel&eacute;fono';
 $_['text_fax']       = 'Fax';
 $_['text_open']      = 'Horario';
 $_['text_comment']   = 'Comentario';
-$_['text_success']   = '<p>Su consulta ha sido enviada con &eacute;xito a la due&ntilde;o de la tienda!</p>';
+$_['text_success']   = '<p>Su consulta ha sido enviada con exito a la dueño de la tienda!</p>';
 
 // Entry
 $_['entry_name']     = 'Su Nombre';
