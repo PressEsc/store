@@ -14,4 +14,4 @@ $_['text_account']      = 'Mi Cuenta';
 $_['text_order']        = 'Historial de Pedidos';
 $_['text_wishlist']     = 'Lista de Deseos';
 $_['text_newsletter']   = 'Bolet&iacute;n Noticias';
-$_['text_powered']      = 'Creado con <a href="https://wuam.es">Opencart</a><br /> %s &copy; %s';
+$_['text_powered']      = '%s &copy; %s';
