@@ -20,7 +20,7 @@ $_['entry_enquiry']  = 'Comentario';
 $_['entry_captcha']  = 'Introduzca el código de la caja de abajo';
 
 // Email
-$_['email_subject']  = 'Comentario';
+$_['email_subject']  = 'Comentario %s';
 
 // Errors
 $_['error_name']     = 'El nombre debe tener entre 3 y 32 caracteres!';
