@@ -27,7 +27,7 @@ class ModelExtensionTotalAdditionalDiscount extends Model {
 			}
 		}
 		
-		$title = $this->config->get('additional_discount_title'.$this->config->get('config_language_id'));
+		$title = $this->config->get('total_additional_discount_title'.$this->config->get('config_language_id'));
 		
 		if($type=='F'){
 			$discount_total = $discount;
