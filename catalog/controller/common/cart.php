@@ -30,7 +30,7 @@ class ControllerCommonCart extends Controller {
 			array_multisort($sort_order, SORT_ASC, $results);
 
 			foreach ($results as $result) {
-				if ($this->config->get('total_' . $result['code'] . '_status')) {
+				if ($this->config->get('total_' . $result['code'] . '_status') && $result['code'] != 'shipping') {
 					$this->load->model('extension/total/' . $result['code']);
 
 					// We have to put the totals in an array so that they pass by reference.
